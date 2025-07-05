@@ -1,4 +1,4 @@
-package com.github.gadini.medical.software.entity;
+package com.github.gadini.medical.software.persistence.entity;
 
 import jakarta.persistence.Embeddable;
 
