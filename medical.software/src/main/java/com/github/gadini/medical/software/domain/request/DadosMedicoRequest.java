@@ -1,6 +1,6 @@
 package com.github.gadini.medical.software.domain.request;
 
-import com.github.gadini.medical.software.persistence.entity.Endereco;
+import com.github.gadini.medical.software.domain.dto.EnderecoDto;
 
 public class DadosMedicoRequest {
 
@@ -8,7 +8,7 @@ public class DadosMedicoRequest {
     private String email;
     private String crm;
     private String telefone;
-    private Endereco endereco;
+    private EnderecoDto endereco;
 
     public String getNome() {
         return nome;
@@ -42,11 +42,11 @@ public class DadosMedicoRequest {
         this.telefone = telefone;
     }
 
-    public Endereco getEndereco() {
+    public EnderecoDto getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
+    public void setEndereco(EnderecoDto endereco) {
         this.endereco = endereco;
     }
 }
