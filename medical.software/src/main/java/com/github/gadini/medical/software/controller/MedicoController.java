@@ -2,6 +2,7 @@ package com.github.gadini.medical.software.controller;
 
 import com.github.gadini.medical.software.domain.request.DadosMedicoRequest;
 import com.github.gadini.medical.software.service.MedicoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,7 @@ public class MedicoController {
     MedicoService medicoService;
 
     @PostMapping
-    public void cadastrar(@RequestBody DadosMedicoRequest request){
+    public void cadastrar(@RequestBody @Valid DadosMedicoRequest request){
         medicoService.salvarMedico(request);
     }
 

@@ -1,13 +1,27 @@
 package com.github.gadini.medical.software.domain.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public class EnderecoDto {
 
+    @NotNull
     private String logradouro;
+
+    @NotNull
     private String bairro;
+
+    @NotNull
     private String cep;
+
+    @NotNull
     private String numero;
+
     private String complemento;
+
+    @NotNull
     private String cidade;
+
+    @NotNull
     private String uf;
 
     public String getLogradouro() {

@@ -1,13 +1,24 @@
 package com.github.gadini.medical.software.domain.request;
 
 import com.github.gadini.medical.software.domain.dto.EnderecoDto;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 public class DadosMedicoRequest {
 
+    @NotNull
     private String nome;
+
+    @NotNull
     private String email;
+
+    @NotNull
     private String crm;
+
     private String telefone;
+
+    @NotNull
+    @Valid
     private EnderecoDto endereco;
 
     public String getNome() {
