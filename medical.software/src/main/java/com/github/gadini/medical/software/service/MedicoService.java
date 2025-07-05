@@ -6,6 +6,7 @@ import com.github.gadini.medical.software.persistence.entity.Medico;
 import com.github.gadini.medical.software.persistence.repository.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MedicoService {
@@ -16,6 +17,7 @@ public class MedicoService {
     @Autowired
     private MedicoRepository medicoRepository;
 
+    @Transactional
     public void salvarMedico(DadosMedicoRequest request){
         Medico medico = medicoMapper.toEntity(request);
         medicoRepository.save(medico);
