@@ -2,6 +2,7 @@ package com.github.gadini.medical.software.domain.response;
 
 public class DadosMedicoResponse {
 
+    private Long id;
     private String nome;
     private String email;
     private String crm;
@@ -9,10 +10,19 @@ public class DadosMedicoResponse {
     public DadosMedicoResponse() {
     }
 
-    public DadosMedicoResponse(String nome, String email, String crm) {
+    public DadosMedicoResponse(Long id, String nome, String email, String crm) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.crm = crm;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {

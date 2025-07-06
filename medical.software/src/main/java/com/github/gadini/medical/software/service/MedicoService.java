@@ -2,6 +2,7 @@ package com.github.gadini.medical.software.service;
 
 import com.github.gadini.medical.software.domain.mapper.MedicoMapper;
 import com.github.gadini.medical.software.domain.request.DadosMedicoRequest;
+import com.github.gadini.medical.software.domain.request.DadosMedicoUpdateRequest;
 import com.github.gadini.medical.software.domain.response.DadosMedicoResponse;
 import com.github.gadini.medical.software.persistence.entity.Medico;
 import com.github.gadini.medical.software.persistence.repository.MedicoRepository;
@@ -32,5 +33,11 @@ public class MedicoService {
     public Page<DadosMedicoResponse> listarMedicos(Pageable pageable){
         return medicoRepository.findAll(pageable)
                 .map(medicoMapper::toResponse);
+    }
+
+    @Transactional
+    public void atualizarMedico(DadosMedicoUpdateRequest request){
+        Medico medico = medicoRepository.getReferenceById(request.getId());
+        medicoMapper.updateEntityFromDto(request, medico);
     }
 }
