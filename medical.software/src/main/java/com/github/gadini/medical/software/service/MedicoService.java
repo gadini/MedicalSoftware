@@ -2,11 +2,15 @@ package com.github.gadini.medical.software.service;
 
 import com.github.gadini.medical.software.domain.mapper.MedicoMapper;
 import com.github.gadini.medical.software.domain.request.DadosMedicoRequest;
+import com.github.gadini.medical.software.domain.response.DadosMedicoResponse;
 import com.github.gadini.medical.software.persistence.entity.Medico;
 import com.github.gadini.medical.software.persistence.repository.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MedicoService {
@@ -21,5 +25,12 @@ public class MedicoService {
     public void salvarMedico(DadosMedicoRequest request){
         Medico medico = medicoMapper.toEntity(request);
         medicoRepository.save(medico);
+    }
+
+    public List<DadosMedicoResponse> listarMedicos(){
+        return medicoRepository.findAll()
+                .stream()
+                .map(medicoMapper::toResponse)
+                .toList();
     }
 }
