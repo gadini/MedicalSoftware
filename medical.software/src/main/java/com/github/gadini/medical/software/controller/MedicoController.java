@@ -5,6 +5,8 @@ import com.github.gadini.medical.software.domain.response.DadosMedicoResponse;
 import com.github.gadini.medical.software.service.MedicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,8 +28,8 @@ public class MedicoController {
     }
 
     @GetMapping
-    public List<DadosMedicoResponse> listar(){
-        return medicoService.listarMedicos();
+    public Page<DadosMedicoResponse> listar(Pageable pageable){
+        return medicoService.listarMedicos(pageable);
     }
 
 }
