@@ -40,4 +40,9 @@ public class MedicoService {
         Medico medico = medicoRepository.getReferenceById(request.getId());
         medicoMapper.updateEntityFromDto(request, medico);
     }
+
+    @Transactional
+    public void excluirMedico(Long id){
+        medicoRepository.deleteById(id);
+    }
 }
