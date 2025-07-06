@@ -44,7 +44,8 @@ public class MedicoService {
 
     @Transactional
     public void excluirMedico(Long id){
-        medicoRepository.deleteById(id);
+        Medico medico = medicoRepository.getReferenceById(id);
+        medicoRepository.delete(medico);
     }
 
     public DadosMedicoCreatedResponse consultarMedico(Long id){
