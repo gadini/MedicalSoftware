@@ -3,7 +3,9 @@ package com.github.gadini.medical.software.service;
 import com.github.gadini.medical.software.domain.mapper.MedicoMapper;
 import com.github.gadini.medical.software.domain.request.DadosMedicoRequest;
 import com.github.gadini.medical.software.domain.request.DadosMedicoUpdateRequest;
+import com.github.gadini.medical.software.domain.response.DadosMedicoCreatedResponse;
 import com.github.gadini.medical.software.domain.response.DadosMedicoResponse;
+import com.github.gadini.medical.software.domain.response.DadosMedicoUpdatedResponse;
 import com.github.gadini.medical.software.persistence.entity.Medico;
 import com.github.gadini.medical.software.persistence.repository.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MedicoService {
@@ -25,9 +24,10 @@ public class MedicoService {
     private MedicoRepository medicoRepository;
 
     @Transactional
-    public void salvarMedico(DadosMedicoRequest request){
+    public DadosMedicoCreatedResponse salvarMedico(DadosMedicoRequest request){
         Medico medico = medicoMapper.toEntity(request);
         medicoRepository.save(medico);
+        return medicoMapper.toCreatedResponse(medico);
     }
 
     public Page<DadosMedicoResponse> listarMedicos(Pageable pageable){
@@ -36,9 +36,10 @@ public class MedicoService {
     }
 
     @Transactional
-    public void atualizarMedico(DadosMedicoUpdateRequest request){
+    public DadosMedicoUpdatedResponse atualizarMedico(DadosMedicoUpdateRequest request){
         Medico medico = medicoRepository.getReferenceById(request.getId());
         medicoMapper.updateEntityFromDto(request, medico);
+        return medicoMapper.toUpdatedResponse(medico);
     }
 
     @Transactional
