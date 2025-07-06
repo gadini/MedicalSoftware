@@ -58,4 +58,9 @@ public class MedicoController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosMedicoCreatedResponse> detalhar(@PathVariable Long id){
+        return ResponseEntity.ok(medicoService.consultarMedico(id));
+    }
+
 }

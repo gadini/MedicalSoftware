@@ -46,4 +46,8 @@ public class MedicoService {
     public void excluirMedico(Long id){
         medicoRepository.deleteById(id);
     }
+
+    public DadosMedicoCreatedResponse consultarMedico(Long id){
+        return medicoMapper.toCreatedResponse(medicoRepository.getReferenceById(id));
+    }
 }
