@@ -1,6 +1,8 @@
 package com.github.gadini.medical.software.controller;
 
 import com.github.gadini.medical.software.domain.request.DadosAutenticacaoRequest;
+import com.github.gadini.medical.software.infra.config.TokenService;
+import com.github.gadini.medical.software.persistence.entity.Usuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,14 @@ public class AutenticacaoController {
     @Autowired
     private AuthenticationManager manager;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping
-    public ResponseEntity<Void> login(@RequestBody @Valid DadosAutenticacaoRequest dados) {
+    public ResponseEntity<String> login(@RequestBody @Valid DadosAutenticacaoRequest dados) {
         var token = new UsernamePasswordAuthenticationToken(dados.getLogin(), dados.getSenha());
         var authentication = manager.authenticate(token);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(tokenService.gerarToken((Usuario) authentication.getPrincipal()));
     }
 }
