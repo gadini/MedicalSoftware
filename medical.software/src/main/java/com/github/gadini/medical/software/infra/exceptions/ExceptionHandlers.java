@@ -1,4 +1,4 @@
-package com.github.gadini.medical.software.infra;
+package com.github.gadini.medical.software.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
