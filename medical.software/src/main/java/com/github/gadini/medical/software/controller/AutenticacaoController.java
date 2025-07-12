@@ -1,6 +1,7 @@
 package com.github.gadini.medical.software.controller;
 
 import com.github.gadini.medical.software.domain.request.DadosAutenticacaoRequest;
+import com.github.gadini.medical.software.domain.response.DadosTokenJwtResponse;
 import com.github.gadini.medical.software.infra.config.TokenService;
 import com.github.gadini.medical.software.persistence.entity.Usuario;
 import jakarta.validation.Valid;
@@ -24,10 +25,12 @@ public class AutenticacaoController {
     private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<String> login(@RequestBody @Valid DadosAutenticacaoRequest dados) {
+    public ResponseEntity<DadosTokenJwtResponse> login(@RequestBody @Valid DadosAutenticacaoRequest dados) {
         var token = new UsernamePasswordAuthenticationToken(dados.getLogin(), dados.getSenha());
         var authentication = manager.authenticate(token);
 
-        return ResponseEntity.ok(tokenService.gerarToken((Usuario) authentication.getPrincipal()));
+        var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
+
+        return ResponseEntity.ok(new DadosTokenJwtResponse(tokenJWT));
     }
 }
